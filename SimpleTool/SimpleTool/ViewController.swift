@@ -20,6 +20,18 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-
+    // MARK: Actions
+    @IBAction func clickCreatePlist(sender: AnyObject) {
+        let paths = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentationDirectory, NSSearchPathDomainMask.AllDomainsMask, true)
+        let path = paths.first as String?
+        path?.stringByAppendingString("cityID")
+        let result = CreatePlistTool.creatPlist(path)
+        if result == true {
+            self.showAlert("完成")
+        }
+        else {
+            self.showAlert("失败")
+        }
+    }
 }
 
