@@ -22,9 +22,10 @@ class ViewController: UIViewController {
 
     // MARK: Actions
     @IBAction func clickCreatePlist(sender: AnyObject) {
-        let paths = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentationDirectory, NSSearchPathDomainMask.AllDomainsMask, true)
-        let path = paths.first as String?
-        path?.stringByAppendingString("cityID")
+        let paths = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true)
+        var path = paths.first as String?
+        path = path?.stringByAppendingString("/cityID.plist")
+        print("\(path)")
         let result = CreatePlistTool.creatPlist(path)
         if result == true {
             self.showAlert("完成")

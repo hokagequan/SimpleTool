@@ -17,9 +17,20 @@ class CreatePlistTool {
         do {
             let text = try self.readTxtFile()
             
-            print(text)
+            if NSFileManager.defaultManager().fileExistsAtPath(path!) == true {
+                try NSFileManager.defaultManager().removeItemAtPath(path!)
+            }
             
-            return true
+            let dictionary = NSMutableDictionary()
+            let cityInfos = text.componentsSeparatedByString("\r\n")
+            for cityInfo in cityInfos {
+                let info = cityInfo.componentsSeparatedByString("=")
+                let city = (info[1] as String).stringByAppendingString("市")
+                let code = info[0]
+                dictionary[city] = code
+            }
+            
+            return dictionary.writeToFile(path!, atomically: true)
         }
         catch {
             return false
